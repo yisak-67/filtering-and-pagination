@@ -1,3 +1,4 @@
+/* Base styles */
 .recommended-flex {
   display: flex;
   margin-left: 20rem;
@@ -8,4 +9,33 @@
   margin-bottom: 20px;
   margin-top: 20px;
   font-size: 20px;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .recommended-flex {
+      margin-left: 10rem;
+  }
+
+  .recommended-title {
+      margin-left: 10rem;
+      font-size: 18px;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .recommended-flex {
+      flex-direction: column;
+      margin-left: 0;
+      align-items: center;
+  }
+
+  .recommended-title {
+      margin-left: 0;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      text-align: center;
+  }
 }

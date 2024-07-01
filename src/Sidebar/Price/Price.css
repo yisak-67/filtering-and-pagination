@@ -1,8 +1,31 @@
-
+/* Base styles */
 .price-title {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+.ml {
+  margin-left: 20px;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .price-title {
+      margin-top: 15px;
   }
-  
+
   .ml {
-    margin-left: 20px;
+      margin-left: 15px;
   }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .price-title {
+      margin-top: 10px;
+      text-align: center; /* Optional: Center align for better presentation on small screens */
+  }
+
+  .ml {
+      margin-left: 10px;
+  }
+}
