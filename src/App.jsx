@@ -1,17 +1,21 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Navigation from './Navigation/Nav';
+import Products from './Product/Product';
+import products from './db/data';
+import Recommended from './Recommended/Recommended';
+import Sidebar from './Sidebar/Sidebar';
+import Card from './components/Card';
 
-import Navigation from "./Navigation/Nav";
-import Products from "./Product/Product";
-import products from "./db/data";
-import Recommended from "./Recommended/Recommended";
-import Sidebar from "./Sidebar/Sidebar";
-import Card from "./components/Card";
-import "./index.css";
+
+import Navbar from './admin/Nav';
+import Dashboard from './admin/Dashboard';
+import ProductList from './admin/ProductList';
+import './index.css';
+import Sidbar from './admin/Sidebar';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  // ----------- Input Filter -----------
   const [query, setQuery] = useState("");
 
   const handleInputChange = (event) => {
@@ -22,12 +26,10 @@ function App() {
     (product) => product.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
   );
 
-  // ----------- Radio Filtering -----------
   const handleChange = (event) => {
     setSelectedCategory(event.target.value);
   };
 
-  // ------------ Button Filtering -----------
   const handleClick = (event) => {
     setSelectedCategory(event.target.value);
   };
@@ -35,12 +37,10 @@ function App() {
   function filteredData(products, selected, query) {
     let filteredProducts = products;
 
-    // Filtering Input Items
     if (query) {
       filteredProducts = filteredItems;
     }
 
-    // Applying selected filter
     if (selected) {
       filteredProducts = filteredProducts.filter(
         ({ category, color, company, newPrice, title }) =>
@@ -70,12 +70,33 @@ function App() {
   const result = filteredData(products, selectedCategory, query);
 
   return (
-    <>
-      <Sidebar handleChange={handleChange} />
-      <Navigation query={query} handleInputChange={handleInputChange} />
-      <Recommended handleClick={handleClick} />
-      <Products result={result} />
-    </>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Sidebar handleChange={handleChange} />
+              <Navigation query={query} handleInputChange={handleInputChange} />
+              <Recommended handleClick={handleClick} />
+              <Products result={result} />
+            </>
+          } />
+
+          <Route path="/admin/*" element={
+            <div className="flex">
+              <Sidbar />
+              <div className="flex-grow">
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/products" element={<ProductList />} />
+                </Routes>
+              </div>
+            </div>
+          } />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
