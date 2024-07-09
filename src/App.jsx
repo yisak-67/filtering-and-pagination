@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navigation from './Navigation/Nav';
 import Products from './Product/Product';
 import products from './db/data';
@@ -7,10 +7,11 @@ import Recommended from './Recommended/Recommended';
 import Sidebar from './Sidebar/Sidebar';
 import Card from './components/Card';
 
-
 import Navbar from './admin/Nav';
 import Dashboard from './admin/Dashboard';
 import ProductList from './admin/ProductList';
+import AddProductForm from './admin/AddProductForm'; // Add this import
+import EditProductForm from './admin/EditProductForm'; // Add this import
 import './index.css';
 import Sidbar from './admin/Sidebar';
 
@@ -90,6 +91,8 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/products" element={<ProductList />} />
+                  <Route path="/products/add" element={<AddProductForm />} /> {/* Add this route */}
+                  <Route path="/products/edit/:id" element={<EditProductForm />} /> {/* Add this route */}
                 </Routes>
               </div>
             </div>
